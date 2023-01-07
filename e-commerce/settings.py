@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #MY APPS
     'products',
+    'search',
     #Terceiros
 
 
