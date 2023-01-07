@@ -1,11 +1,10 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import ListView
 from products.models import Product
 
-
 class SearchProductView(ListView):
     template_name = "search/view.html"
-
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -13,7 +12,6 @@ class SearchProductView(ListView):
         context['query'] = query
         #SearchQuery.objects.create(query=query)
         return context
-
 
     def get_queryset(self, *args, **kargs):
         request = self.request
@@ -23,5 +21,6 @@ class SearchProductView(ListView):
         query = result.get('q',  None) # method['q']
         print('Consulta', query)
         if query is not None:
-            return Product.objects.filter(title__contains = query)
+            lookups = Q(title__contains = query) | Q(description__contains = query)
+            return Product.objects.filter(lookups).distinct()
         return Product.objects.featured()
