@@ -9,6 +9,8 @@ from .forms import ContactForm, LoginForm, RegisterForm
 
 # Create your views here.
 def home(request):
+    print(request.session.get('first_name', 'Unknow'))
+
     context = {
         "title": "Página principal",
         "content": "Bem-vindo a página principal"
