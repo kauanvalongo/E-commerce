@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #MY APPS
     'products',
     'search',
+    'tags',
     #Terceiros
 
 
