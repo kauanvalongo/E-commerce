@@ -20,7 +20,7 @@ from django.views.generic import TemplateView
 
 from django.conf import settings
 from django.conf.urls.static import static
-
+from carts.views import cart_home
 from products.views import (ProductListView,                         
                             ProductDetailView,  
                             ProductDetailSlugView,                       
@@ -35,6 +35,7 @@ urlpatterns = [
     path('home', home, name='home'),
     path('about/', about_page, name='about'),
 	path('contact/', contact_page, name='contact'),
+    path('cart/', cart_home, name='cart'),
     path('login/',  login_page, name='login'),
     path('logout/', logout_page, name='logout'),
     path('register/',  register_page, name='register'),
