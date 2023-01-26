@@ -3,7 +3,9 @@ from django.db import models
 
 from products.models import Product
 
-class CartManager(models.manager):
+User = settings.AUTH_USER_MODEL
+
+class CartManager(models.Manager):
     def new_or_get(self, request):
         cart_id = request.session.get("cart_id", None)
         qs = self.get_queryset().filter(id = cart_id)
@@ -26,8 +28,6 @@ class CartManager(models.manager):
                 user_obj = user
         return self.model.objects.create(user = user_obj)
 
-
-User = settings.AUTH_USER_MODEL
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null = True, blank = True)
     products = models.ManyToManyField(Product, blank = True)
