@@ -38,7 +38,7 @@
         </li>
       {% endif %}
       <li class="nav-item {% if request.path == cart_url %} active {% endif %}">
-        <a class="nav-link" href="{{ cart_url }}">{{ request.session.cart_items }} Carrinho</a>
+        <a class="nav-link" href="{{ cart_url }}">{{ request.session.cart_items }} <i class="fa fa-shopping-cart"></i></a>
       </li>
 
 
