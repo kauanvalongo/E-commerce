@@ -1,7 +1,8 @@
 from django.db import models
-from e_commerce.utils import unique_order_id_generator
+from utils.utils import unique_order_id_generator
 from django.db.models.signals import pre_save
 from carts.models import Cart
+
 
 ORDER_STATUS_CHOICES = (
     ('created', 'Criado'),
