@@ -5,7 +5,6 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from .forms import LoginForm, RegisterForm, GuestForm
 from .models import GuestEmail
 
-
 def guest_register_view(request):
     form = GuestForm(request.POST or None)
     context = {
@@ -33,7 +32,7 @@ def login_page(request):
     print(request.user.is_authenticated)
     next_ = request.GET.get('next')
     next_post = request.POST.get('next')
-    redirect_path = next_ or next_post or None    
+    redirect_path = next_ or next_post or None
     if form.is_valid():
         print(form.cleaned_data)
         username = form.cleaned_data.get("username")
