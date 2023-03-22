@@ -6,6 +6,7 @@ from billing.models import BillingProfile
 from orders.models import Order
 from products.models import Product
 from .models import Cart
+from addresses.forms import AddressForm
 
 def cart_home(request):
     cart_obj, new_obj  = Cart.objects.new_or_get(request)
@@ -36,14 +37,12 @@ def checkout_home(request):
     #ou se o carrinho já existir mas não tiver nada dentro
     if cart_created or cart_obj.products.count() == 0:
         return redirect("cart:home")
-    #aqui a order associada ao carrinho
-    else:
-        order_obj, new_order_obj = Order.objects.get_or_create(cart = cart_obj)
-    user = request.user
-    billing_profile = None
+
+
     login_form = LoginForm()
     guest_form = GuestForm()
-    guest_email_id = request.session.get('guest_email_id')
+    address_form = AddressForm()
+
 
     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
     
@@ -54,6 +53,7 @@ def checkout_home(request):
         "object": order_obj,
         "billing_profile": billing_profile,
         "login_form": login_form,
-        "guest_form": guest_form
+        "guest_form": guest_form,
+        "address_form": address_form,
     }
     return render(request, "carts/checkout.html", context)
