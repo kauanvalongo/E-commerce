@@ -37,11 +37,6 @@ def checkout_home(request):
     #ou se o carrinho já existir mas não tiver nada dentro
     if cart_created or cart_obj.products.count() == 0:
         return redirect("cart:home")
-    #aqui a order associada ao carrinho
-    else:
-        order_obj, new_order_obj = Order.objects.get_or_create(cart = cart_obj)
-    user = request.user
-    billing_profile = None
 
 
     login_form = LoginForm()
