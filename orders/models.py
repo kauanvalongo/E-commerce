@@ -4,6 +4,7 @@ import math
 from django.utils.text import slugify
 from billing.models import BillingProfile
 from django.db import models
+from addresses.models import Address
 from django.db.models.signals import pre_save, post_save
 from carts.models import Cart
 
@@ -50,6 +51,8 @@ class OrderManager(models.Manager):
 
 class Order(models.Model):
     billing_profile = models.ForeignKey(BillingProfile, on_delete=models.CASCADE, null = True, blank = True)
+    shipping_address = models.ForeignKey(Address, related_name="shipping_address", on_delete=models.CASCADE, null=True, blank=True)
+    billing_address = models.ForeignKey(Address, related_name="billing_address", on_delete=models.CASCADE, null=True, blank=True)
     order_id = models.CharField(max_length = 120, blank = True)
     # billing_profile = ?
     # shipping_address = ?
