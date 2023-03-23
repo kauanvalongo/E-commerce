@@ -36,7 +36,9 @@
     <p>Total do carrinho: {{ object.cart.total }}</p>
     <p>Frete: {{ object.shipping_total }}</p>
     <p>Total: {{ object.total }}</p>
-    <button>Checkout</button> 
+    <form class='form' method='POST' action="">{% csrf_token %}
+      <button type='submit'>Checkout</button>
+    </form> 
   {% endif %}
 {% endif %}
 {% endblock %}

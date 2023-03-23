@@ -37,7 +37,10 @@ class OrderManager(models.Manager):
         qs = self.get_queryset().filter(
                 billing_profile = billing_profile, 
                 cart = cart_obj, 
-                active = True)
+                active = True,
+                status='created',
+                )
+        
         if qs.count() == 1:
             obj = qs.first()
         else:
@@ -67,6 +70,30 @@ class Order(models.Model):
         return self.order_id
     
     objects = OrderManager()
+
+
+    def update_total(self):
+        cart_total = self.cart.total
+        shipping_total = self.shipping_total
+        new_total = math.fsum([cart_total, shipping_total])
+        formatted_total = format(new_total, '.2f')
+        self.total = formatted_total 
+        self.save()
+        return new_total
+    def check_done(self):
+        billing_profile = self.billing_profile
+        shipping_address = self.shipping_address
+        billing_address = self.billing_address
+        total = self.total
+        if billing_profile and shipping_address and billing_address and total > 0:
+            return True
+        return False
+
+    def mark_paid(self):
+        if self.check_done():
+            self.status = "paid"
+            self.save()
+        return self.status
 
 
     def update_total(self):
