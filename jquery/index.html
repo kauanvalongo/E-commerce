@@ -13,6 +13,9 @@
         h1{
             color: green;
         }
+        #header-3 {
+            
+        }
         .description {
             height: 300px;
             width: 250px;
@@ -23,10 +26,11 @@
   <body>
     <h1 class='header'>Olá mundo!</h1>
     <h1 class='header'>Olá mundo!</h1>   
-    <h1 class='header' id='header-3'>Olá mundo!</h1>
+    <h1 class='header' id='header-3'>Cabeçalho 3</h1>
     <h1 class='header'>Olá mundo!</h1>
     <p class="description">Primeiro parágrafo</p>
-    <p class="description">Segundo parágrafo</p>
+    <p class="description"><a href='#'>Link Qualquer</a></p>
+    <!-- <p class="description"><a href='/abc/'>Link Qualquer</a></p>-->
     <p class="description">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis dolor non arcu fringilla tempus. Nam sollicitudin justo eu risus vestibulum finibus. Aliquam aliquet volutpat mi, vitae tempor tellus placerat sit amet. Praesent faucibus diam vitae arcu posuere, non dapibus ipsum lobortis. Nunc accumsan neque quis lacus molestie vehicula. Aenean imperdiet, urna eget ultrices sodales, mi urna hendrerit quam, vel imperdiet erat risus ac odio. Nullam congue quis arcu nec ullamcorper. Cras hendrerit justo sed enim accumsan, a mattis leo tincidunt. Etiam vel velit purus. In dapibus at augue tempor rutrum. Morbi suscipit metus et euismod rutrum. Sed at mollis metus. Phasellus est metus, fermentum eu elementum vitae, posuere in tellus.
       Vestibulum vulputate in tellus eget mollis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras mollis purus quis ipsum rhoncus, at cursus nisi interdum. Aliquam erat volutpat. Duis urna justo, hendrerit vel tempor id, fringilla venenatis lorem. Aenean ac velit mauris. Mauris viverra ex quis lacus pellentesque mattis. Integer sit amet consectetur nunc. Sed a pellentesque orci, ac gravida nisl. Duis nec sapien malesuada, volutpat dolor id, blandit dui. Ut id hendrerit metus. Proin quis mollis mauris. Integer nec lorem enim. Aliquam non finibus mauris. Ut euismod scelerisque nunc feugiat rhoncus. Aliquam erat volutpat.
@@ -53,24 +57,40 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script type="text/javascript">
-        $(document).ready(function(){
-            // $descriptionItems recebe um array
-            const $descriptionItems = $(".description")
-           // console.log($descriptionItems.length)//
-            $.each($descriptionItems, function(index, obj){
-                const item = $(this) 
-                const actualHeight = item[0].scrollHeight
-                const shouldBeHeight = item.height()
-                console.log(actualHeight, shouldBeHeight)
-                if(actualHeight > shouldBeHeight){
-                    item.css("overflow-y", "scroll")
-                }
-            })
+      $(document).ready(function(){
+        // $descriptionItems recebe um array
+        const $descriptionItems = $(".description")
+        // console.log($descriptionItems.length)//
+        $.each($descriptionItems, function(index, obj){
+          const item = $(this)
+          const actualHeight = item[0].scrollHeight 
+          const shouldBeHeight = item.height() 
+          //console.log(actualHeight, shouldBeHeight)
+          if(actualHeight > shouldBeHeight){
+            item.css("overflow-y", "scroll")
+          }
         })
+
+        const header3 = $("#header-3")
+        header3.click(function(){
+          const $this = $(this)
+          console.log($this)
+          console.log(event)
+          window.location.href = 'https://www.codigofluente.com.br/'
+        })
+
+        const descriptionLinks = $(".description a")
+        descriptionLinks.click(function(event){
+          console.log(event)
+          event.preventDefault()
+          const $this = $(this)
+          const href = $this.attr("href")
+          console.log(href)
+          alert(href)
+          window.location.href = 'https://www.google.com/'
+        })
+      })
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
 </html>
