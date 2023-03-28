@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 
 from accounts.forms import LoginForm, GuestForm
 from accounts.models import GuestEmail
@@ -14,25 +15,37 @@ def cart_home(request):
     return render(request, "carts/home.html", {"cart": cart_obj})
 
 def cart_update(request):
-    
     product_id = request.POST.get('product_id')
-
-    if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        print("Ajax request")
-        
     if product_id is not None:
         try:
-            product_obj = Product.objects.get(id = product_id)
+            product_obj = Product.objects.get(id=product_id)
         except Product.DoesNotExist:
             print("Mostrar mensagem ao usuário, esse produto acabou!")
             return redirect("cart:home")
-        cart_obj, new_obj = Cart.objects.new_or_get(request) 
-        if product_obj in cart_obj.products.all(): 
-            cart_obj.products.remove(product_obj) 
-        else: 
-            cart_obj.products.add(product_obj)
+        cart_obj, new_obj = Cart.objects.new_or_get(request)
+        if product_obj in cart_obj.products.all():
+            cart_obj.products.remove(product_obj)
+            added = False
+        else:
+            cart_obj.products.add(product_obj) # cart_obj.products.add(product_id)
+            added = True
         request.session['cart_items'] = cart_obj.products.count()
-    return redirect("cart:home")
+        # return redirect(product_obj.get_absolute_url())
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            print("Ajax request")
+            print(cart_obj.products.all) 
+             
+            json_data = {
+                "added": added,
+                "removed": not added,
+                "cartItemCount": cart_obj.products.count()
+            }
+            return JsonResponse(json_data)
+    return redirect("cart:home") 
+
+
+
+
 
 def checkout_home(request):
     #aqui a gente pega o carrinho
