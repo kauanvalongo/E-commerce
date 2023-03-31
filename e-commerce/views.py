@@ -1,11 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse ,JsonResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.contrib.auth import authenticate, get_user_model
 from .forms import ContactForm
 
+
+
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 # Create your views here.
 def home(request):
@@ -36,10 +40,11 @@ def contact_page(request):
     }
     if contact_form.is_valid():
         print(contact_form.cleaned_data)
-    #if request.method == "POST":
-        #print(request.POST)
-        #print(request.POST.get('Nome_Completo'))
-        #print(request.POST.get('email'))
-        #print(request.POST.get('Mensagem'))
+        if is_ajax(request):
+            return JsonResponse({"message": "Obrigado!"})
+    if contact_form.errors:
+        errors = contact_form.errors.as_json()
+        if is_ajax(request):
+            return HttpResponse(errors, status=400, content_type='application/json')
 
     return render(request, "contact/view.html",  context)
