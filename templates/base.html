@@ -6,17 +6,18 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Base Template</title>
+        <title>Djangando</title>
         
         {% include 'base/css.html' %}
         {% block base_head %}{% endblock base_head %}
     </head>
 
     <body>
-        {% include 'base/navbar.html' with nome_da_marca='Ecommerce' %}
-        <div class="container">
-            {% block content %} {% endblock %}
-        </div>  
+        {% include 'base/navbar.html' with nome_da_marca='Djangando' %}
+ 
+        {% block content %} {% endblock %} 
+        
         {% include 'base/js.html' %}
+        
     </body>
 </html>

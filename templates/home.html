@@ -5,23 +5,22 @@
 <title>Home Page Template</title>
 
 {% block base_head %}
-    <link rel='stylesheet' href='{% static "css/inicio.css" %}'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/inicio.css'%}"/>
 {% endblock base_head %}
 
 {% block content %}
     <!-- Aqui vai tudo que é referente a home_page  -->
-    <div class='text-center'>
+    <!-- <div class='text-center'>
         <h1>{{ title }}</h1>
         <p>{{ content }}</p>
-    </div>
+    </div> -->
 
-    <div class='row'>
-        <div class='col'>
-            <img src="{% static 'img/camiseta.jpg' %}" class='img-fluid' />
-            <p>{{ content }}</p>
-        </div>
+    <div class="banner">      
+        <img src="{% static 'img/Bannerdjango.png' %}" class='img-fluid' />
+        <!-- <p>{{ content }}</p> -->
     </div>
-
+    
     {% if request.user.is_authenticated %}
         <div class='row'>
             <div class='col'>
@@ -30,6 +29,84 @@
             </div>
         </div>
     {% endif %}
+
+    <section id="products">
+
+        <p>
+            Produtos
+        </p>
+
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div id="footer-contacts">
+              <h1>Logo</h1>
+              <p>Its all about your dreams</p> 
+              <div id="footer-social-media">
+                <a href="#" class="footer-link" id="instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#" class="footer-link" id="facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <a href="#" class="footer-link" id="whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+              </div> 
+            </div>
+
+            <ul class="footer-list">
+                <li>
+                    <h3>Blog</h3>
+                </li>
+                <li>
+                    <a href="#" class="footer-link">Tech</a>
+                </li>
+                <li>
+                    <a href="#" class="footer-link">Adventures</a>
+                </li>
+                <li>
+                    <a href="#" class="footer-link">Music</a>
+                </li>
+            </ul>
+
+            <ul class="footer-list">
+                <li>
+                    <h3>Products</h3>
+                </li>
+                <li>
+                    <a href="#" class="footer-link">App</a>
+                </li>
+                <li>
+                    <a href="#" class="footer-link">Desktop</a>
+                </li>
+                <li>
+                    <a href="#" class="footer-link">Cloud</a>
+                </li>
+            </ul>
+
+            <div id="footer-subscribe">
+                <h3>Subscribe</h3>
+                <p>
+                    Enter your e-mail to get notified about our news solutions
+                </p>
+
+                <div id="input-group">
+                    <input type="email" id="email">
+                    <button>
+                        <i class="fa-regular fa-envelope"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="footer-copyright">
+           &#169
+           2023 all rights reserved 
+        </div>
+    </footer>
     
 
 {% endblock %}
