@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.row {
+    margin-right: 0px !important;
+}
+
+.card {
+    margin-left: 75px;
+    align-items: center;
+}
+
+.card a img{
+    height: 250px;
+}
+
